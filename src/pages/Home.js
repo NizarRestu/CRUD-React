@@ -60,7 +60,7 @@ export default function Home() {
                     Hapus
                   </Button>
                   <a href={"/edit/" + book.id} >
-                    <Button variant="warning" className="mx-1">
+                    <Button variant="success" className="mx-1">
                       Ubah
                     </Button>
                   </a>
