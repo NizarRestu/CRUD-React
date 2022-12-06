@@ -1,0 +1,25 @@
+{
+  "daftarBuku": [
+    {
+      "judul": "Keong Mas",
+      "deskripsi": "Cerita Rakyat ",
+      "pengarang": "Ikranegara, Tira",
+      "tahunTerbit": "2022-12-23",
+      "id": 2
+    },
+    {
+      "judul": "Si Kancil",
+      "deskripsi": "Cerita Fabel",
+      "pengarang": "Yudhistira Ikranegara",
+      "tahunTerbit": "2013-12-08",
+      "id": 4
+    },
+    {
+      "judul": "Takuban Perahu",
+      "deskripsi": "Cerita Rakyat",
+      "pengarang": "Aan Merdeka Permana",
+      "tahunTerbit": "2017-12-12",
+      "id": 5
+    }
+  ]
+}

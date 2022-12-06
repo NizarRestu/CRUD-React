@@ -1,0 +1,21 @@
+.box{
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    border: 2px solid;
+    border-radius: 5%;
+    margin: auto;
+    padding: 30px;
+    text-align: left;
+    margin-top: 50px;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: white;
+}
+.button{
+    margin-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+h5{
+    text-align: center;
+}
