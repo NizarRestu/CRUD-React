@@ -55,12 +55,12 @@ export default function Edit() {
             pengarang: pengarang,
             tahunTerbit: tahunTerbit,
           });
+          history.push("/");
           Swal.fire("Berhasil!", "Data kamu berhasil di update.", "success");
           //untuk mengatur kapan menjalankan method yang ada didalam
           setTimeout(() => {
             window.location.reload();
           }, 2000);
-          history.push("/");
         }
         history.push("/");
       });

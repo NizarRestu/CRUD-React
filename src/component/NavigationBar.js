@@ -7,10 +7,11 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Form from 'react-bootstrap/Form';
+import Form from "react-bootstrap/Form";
+import { useHistory } from "react-router-dom";
 
 function NavigationBar() {
-    //useState untuk menyimpan data sementara 
+  //useState untuk menyimpan data sementara
   const [show, setShow] = useState(false);
   const [judul, setJudul] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
@@ -19,12 +20,12 @@ function NavigationBar() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-    //fungtion untuk menambahkan data
-  const addBuku = async (e) => {           
+  //fungtion untuk menambahkan data
+  const addBuku = async (e) => {
     e.preventDefault();
     e.persist();
 
-        //try catch untuk memastikan terjadi kesalahan
+    //try catch untuk memastikan terjadi kesalahan
     try {
       // library opensource yang digunakan untuk request data melalui http.
       await axios.post("http://localhost:8000/daftarBuku", {
@@ -43,6 +44,13 @@ function NavigationBar() {
     }
   };
 
+  const history = useHistory();
+  const logout = () => {
+    window.location.reload();
+    localStorage.clear();
+    history.push("/");
+  };
+
   return (
     <div>
       <Navbar bg="dark" variant="dark">
@@ -52,10 +60,21 @@ function NavigationBar() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/">Link</Nav.Link>
-              <Nav.Link href="#modal" onClick={handleShow}>
-                Tambah Buku
-              </Nav.Link>
+              {localStorage.getItem("id") !== null ? (
+                <>
+                  <Nav.Link href="#modal" onClick={handleShow}>
+                    Tambah Buku
+                  </Nav.Link>
+                  <Nav.Link onClick={logout}>
+                      Logout
+                  </Nav.Link>
+                </>
+              ) : (
+                <>
+                  <Nav.Link href="/login">Login</Nav.Link>
+                </>
+              )}
+
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/">Action</NavDropdown.Item>
                 <NavDropdown.Item href="/">Another action</NavDropdown.Item>
@@ -123,13 +142,23 @@ function NavigationBar() {
               />
             </div>
             <br />
-            <Button className="mx-1 button-btl btn" variant="danger" onClick={handleClose}>Close</Button>
-            <Button className="mx-1 button-btl btn" type="submit" variant="primary">
+            <Button
+              className="mx-1 button-btl btn"
+              variant="danger"
+              onClick={handleClose}
+            >
+              Close
+            </Button>
+            <Button
+              className="mx-1 button-btl btn"
+              type="submit"
+              variant="primary"
+            >
               Save
             </Button>
           </Modal.Body>
           <Modal.Footer>
-          {/* <Button className="mx-1 button-btl btn" variant="danger" onClick={handleClose}>Close</Button>
+            {/* <Button className="mx-1 button-btl btn" variant="danger" onClick={handleClose}>Close</Button>
             <Button className="mx-1 button-btl btn" type="submit" variant="primary">
               Save
             </Button> */}

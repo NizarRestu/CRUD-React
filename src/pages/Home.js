@@ -59,7 +59,10 @@ export default function Home() {
             <th>Deskripsi</th>
             <th>Tahun Terbit</th>
             <th>Pengarang</th>
-            <th>Aksi</th>
+            { localStorage.getItem("id") !== null ? 
+              <th>Aksi</th> : <></>
+
+            }
           </tr>
         </thead>
         <tbody>
@@ -73,20 +76,22 @@ export default function Home() {
                     <td>{book.deskripsi}</td>
                     <td>{book.tahunTerbit}</td>
                     <td>{book.pengarang}</td>
-                    <td>
-                      <a href={"/edit/" + book.id}>
-                        <Button variant="success" className="mx-1">
-                          Ubah
+                      {localStorage.getItem("id") !== null ? (
+                        <td>
+                        <a href={"/edit/" + book.id}>
+                          <Button variant="success" className="mx-1">
+                            Ubah
+                          </Button>
+                        </a>
+                        <Button
+                          variant="danger"
+                          className="mx-1"
+                          onClick={() => deleteUser(book.id)}
+                        >
+                          Hapus
                         </Button>
-                      </a>
-                      <Button
-                        variant="danger"
-                        className="mx-1"
-                        onClick={() => deleteUser(book.id)}
-                      >
-                        Hapus
-                      </Button>
-                    </td>
+                      </td>
+                      ) : <></>}
                   </tr>
                 );
               })}

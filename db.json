@@ -1,10 +1,22 @@
 {
+  "users":[
+    {
+      "id":1,
+      "username":"nizar",
+      "password":"111"
+    },
+    {
+      "id":2,
+      "username":"admin",
+      "password":"123"
+    }
+  ],
   "daftarBuku": [
     {
       "judul": "Si Kancil",
       "deskripsi": "Si Kancil pencuri timun",
-      "tahunTerbit": "2022-12-07",
       "pengarang": "Yudhistira Ikranegara",
+      "tahunTerbit": "2022-01-07",
       "id": 1
     }
   ]
