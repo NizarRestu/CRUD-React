@@ -10,6 +10,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from 'react-bootstrap/Form';
 
 function NavigationBar() {
+    //useState untuk menyimpan data sementara 
   const [show, setShow] = useState(false);
   const [judul, setJudul] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
@@ -18,17 +19,21 @@ function NavigationBar() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+    //fungtion untuk menambahkan data
   const addBuku = async (e) => {           
     e.preventDefault();
     e.persist();
 
+        //try catch untuk memastikan terjadi kesalahan
     try {
+      // library opensource yang digunakan untuk request data melalui http.
       await axios.post("http://localhost:8000/daftarBuku", {
         judul: judul,
         deskripsi: deskripsi,
         tahunTerbit: tahunTerbit,
         pengarang: pengarang,
       });
+      //Sweet Alert
       Swal.fire("Berhasil!", "Data Berhasil Ditambahkan", "success");
       setTimeout(() => {
         window.location.reload();

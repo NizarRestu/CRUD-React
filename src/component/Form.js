@@ -1,31 +1,37 @@
 import React, { useState } from "react";
 import "../style/form.css";
-import axios from 'axios'
+import axios from "axios";
 import Swal from "sweetalert2";
 
 export default function Form() {
+  //useState untuk menyimpan data sementara 
   const [judul, setJudul] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
   const [pengarang, setPengarang] = useState("");
   const [tahunTerbit, setTahunTerbit] = useState("");
 
+
+  //fungtion untuk menambahkan data
   const addBuku = async (e) => {
     e.preventDefault();
     e.persist();
 
+    //try catch untuk memastikan terjadi kesalahan
     try {
-        await axios.post("http://localhost:8000/daftarBuku", {
-            judul :judul,
-            deskripsi : deskripsi,
-            tahunTerbit:tahunTerbit,
-            pengarang: pengarang
-        });
-        Swal.fire("Berhasil!", "Data Berhasil Ditambahkan", "success");
-        setTimeout(() => {
-            window.location.reload();
-          }, 2000);
+      //untuk menambahkan data
+      await axios.post("http://localhost:8000/daftarBuku", {
+        judul: judul,
+        deskripsi: deskripsi,
+        tahunTerbit: tahunTerbit,
+        pengarang: pengarang,
+      });
+      //Sweet alert
+      Swal.fire("Berhasil!", "Data Berhasil Ditambahkan", "success");
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (error) {
-      alert("Terjadi Kesalahan" + error)
+      alert("Terjadi Kesalahan" + error);
     }
   };
   return (

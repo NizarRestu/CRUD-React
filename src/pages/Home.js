@@ -4,10 +4,12 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Swal from "sweetalert2";
 export default function Home() {
+  //useState untuk menyimpan data sementara
   const [buku, setBuku] = useState([]);
+  //method untuk menjalankan axios
   const getAll = async () => {
-    await
-     axios
+    // library opensource yang digunakan untuk request data melalui http.
+    await axios
       .get("http://localhost:8000/daftarBuku")
       .then((res) => {
         setBuku(res.data);
@@ -22,16 +24,34 @@ export default function Home() {
   }, []);
 
   const deleteUser = async (id) => {
-    axios.delete("http://localhost:8000/daftarBuku/" + id);
-    Swal.fire("Berhasil!", "Data Berhasil Dihapus", "success");
-    getAll();
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000);
+    Swal.fire({
+      title: "Apakah Ingin Di Hapus?",
+      text: "Data kamu tidak bisa dikembalikan!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, Hapus!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete("http://localhost:8000/daftarBuku/" + id);
+        Swal.fire("Berhasil!", "Data kamu berhasil di hapus.", "success");
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      }
+    });
   };
+  //untuk mengatur kapan menjalankan method yang ada didalam
   return (
     <div>
-      <Table striped bordered hover className="bg-light" style={{width:"80%", margin:"auto",marginTop:"40px"}}>
+      <Table
+        striped
+        bordered
+        hover
+        className="bg-light"
+        style={{ width: "80%", margin: "auto", marginTop: "40px" }}
+      >
         <thead className="bg-dark text-light">
           <tr>
             <th>No.</th>
@@ -52,18 +72,18 @@ export default function Home() {
                 <td>{book.tahunTerbit}</td>
                 <td>{book.pengarang}</td>
                 <td>
-                  <Button
-                    variant="danger"
-                    className="mx-1"
-                    onClick={() => deleteUser(book.id)}
-                  >
-                    Hapus
-                  </Button>
-                  <a href={"/edit/" + book.id} >
+                  <a href={"/edit/" + book.id}>
                     <Button variant="success" className="mx-1">
                       Ubah
                     </Button>
                   </a>
+                  <Button
+                      variant="danger"
+                      className="mx-1"
+                      onClick={() => deleteUser(book.id)}
+                    >
+                      Hapus
+                    </Button>
                 </td>
               </tr>
             );
