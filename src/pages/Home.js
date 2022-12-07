@@ -63,31 +63,40 @@ export default function Home() {
           </tr>
         </thead>
         <tbody>
-          {buku.map((book, index) => {
-            return (
-              <tr key={book.id}>
-                <td>{index + 1}</td>
-                <td>{book.judul}</td>
-                <td>{book.deskripsi}</td>
-                <td>{book.tahunTerbit}</td>
-                <td>{book.pengarang}</td>
-                <td>
-                  <a href={"/edit/" + book.id}>
-                    <Button variant="success" className="mx-1">
-                      Ubah
-                    </Button>
-                  </a>
-                  <Button
-                      variant="danger"
-                      className="mx-1"
-                      onClick={() => deleteUser(book.id)}
-                    >
-                      Hapus
-                    </Button>
-                </td>
-              </tr>
-            );
-          })}
+          {buku.length !== 0 ? (
+            <>
+              {buku.map((book, index) => {
+                return (
+                  <tr key={book.id}>
+                    <td>{index + 1}</td>
+                    <td>{book.judul}</td>
+                    <td>{book.deskripsi}</td>
+                    <td>{book.tahunTerbit}</td>
+                    <td>{book.pengarang}</td>
+                    <td>
+                      <a href={"/edit/" + book.id}>
+                        <Button variant="success" className="mx-1">
+                          Ubah
+                        </Button>
+                      </a>
+                      <Button
+                        variant="danger"
+                        className="mx-1"
+                        onClick={() => deleteUser(book.id)}
+                      >
+                        Hapus
+                      </Button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </>
+          ) : (
+            <>
+            <h3 style={{textAlign:"center"}}>Tidak Ada Data </h3>
+           
+            </>
+          )}
         </tbody>
       </Table>
     </div>
